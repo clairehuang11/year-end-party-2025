@@ -167,6 +167,28 @@ body::after{
   box-shadow: 0 0 26px rgba(53,230,255,.10);
 }
 
+
+/* Mobile-friendly scaling for the seating map */
+.map{--scale:1;}
+.mapInner{
+  position:absolute;
+  inset:0;
+  transform-origin: top left;
+  transform: scale(var(--scale));
+  width: calc(100% / var(--scale));
+  height: calc(100% / var(--scale));
+}
+/* Slightly enlarge touch targets on mobile while keeping layout */
+@media (max-width: 520px){
+  .map{--scale:0.88;}
+}
+@media (max-width: 420px){
+  .map{--scale:0.80;}
+}
+@media (max-width: 360px){
+  .map{--scale:0.74;}
+}
+
 </style>
 </head>
 <body>
@@ -199,7 +221,8 @@ body::after{
 
   <div class="mapWrap">
     <div class="map" id="map">
-      <div class="stage">STAGE</div>
+            <div class="mapInner" id="mapInner">
+<div class="stage">STAGE</div>
       <div class="marker" id="marker">YOU ARE HERE</div>
 
       <div class="line" style="left:50%; top:50%; height:160px; transform:translate(-1px,20px) rotate(0deg);"></div>
@@ -222,6 +245,7 @@ body::after{
       </div>
       <div class="node cyan" data-table="5" style="left:72%; top:80%; transform:translate(-50%,-50%); width:120px; height:120px;">
         <div class="t">TABLE</div><div class="no">05</div><div class="tag">DELTA</div>
+      </div>
       </div>
     </div>
   </div>
